@@ -1,4 +1,5 @@
 from rest_framework import generics
+from rest_framework import permissions
 from api.models import Article
 from api.models import Launch
 from api.models import Event
@@ -18,20 +19,24 @@ class ArticleDetail(generics.RetrieveUpdateDestroyAPIView):
 
 
 class LaunchList(generics.ListCreateAPIView):
+    permission_classes = [permissions.IsAuthenticated]
     queryset = Launch.objects.all()
     serializer_class = LaunchSerializer
 
 
 class LaunchDetail(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = [permissions.IsAuthenticated]
     queryset = Launch.objects.all()
     serializer_class = LaunchSerializer
 
 
 class EventList(generics.ListCreateAPIView):
+    permission_classes = [permissions.IsAuthenticated]
     queryset = Event.objects.all()
     serializer_class = EventSerializer
 
 
 class EventDetail(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = [permissions.IsAuthenticated]
     queryset = Event.objects.all()
     serializer_class = EventSerializer
