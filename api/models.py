@@ -26,3 +26,6 @@ class Article(models.Model):
     updatedAt = models.DateTimeField()
     launches = models.ManyToManyField(Launch, blank=True)
     events = models.ManyToManyField(Event, blank=True)
+
+    def __str__(self) -> str:
+        return self.title
