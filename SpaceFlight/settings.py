@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+import django_heroku
 
 # Flake Config
 # flake8: noqa
@@ -146,6 +147,11 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticatedOrReadOnly',
     ]
 }
+
+
+# HEROKU CONFIG
+
+django_heroku.settings(locals())
 
 
 # Local Settings
