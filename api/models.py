@@ -23,7 +23,7 @@ class Article(models.Model):
     imageUrl = models.URLField()
     newsSite = models.CharField(max_length=100)
     featured = models.BooleanField(default=False)
-    summary = models.CharField(max_length=300, blank=True)
+    summary = models.CharField(max_length=1500, blank=True)
     publishedAt = models.DateTimeField()
     updatedAt = models.DateTimeField()
     launches = models.ManyToManyField(Launch, blank=True)
