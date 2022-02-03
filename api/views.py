@@ -1,6 +1,8 @@
-from django.http import HttpResponse
-from django.views import View
+from django.http import HttpResponse, HttpResponseForbidden
 from rest_framework import generics
+from rest_framework.views import APIView
+from rest_framework.authentication import SessionAuthentication, TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
 from api.models import Article
 from api.models import Launch
 from api.models import Event
@@ -25,6 +27,10 @@ class ArticleList(generics.ListCreateAPIView):
 class ArticleDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Article.objects.all()
     serializer_class = ArticleSerializer
+
+    def put(self, request, *args, **kwargs):
+        self.serializer_class.create(self, validated_data=request.data, *args, **kwargs)
+        return HttpResponse('Update finished sucessfully.', status=200)
 
 
 class LaunchList(generics.ListCreateAPIView):
@@ -95,15 +101,20 @@ class SpaceFlightAPIConsumer():
         return calls
 
 
-class UpdateDatabase(View):
+class UpdateDatabase(APIView):
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [SessionAuthentication, TokenAuthentication]
 
     def get(self, request, *args, **kwargs) -> HttpResponse:
-        api_consumer = SpaceFlightAPIConsumer()
-        api_response = asyncio.run(api_consumer.get_all_articles())
-        serializer = ArticleSerializer
+        if request.user.is_authenticated:
+            api_consumer = SpaceFlightAPIConsumer()
+            api_response = asyncio.run(api_consumer.get_all_articles())
+            serializer = ArticleSerializer
 
-        for json_chunk in api_response:
-            for item in json_chunk:
-                serializer.create(self, validated_data=item, *args, **kwargs)
+            for json_chunk in api_response:
+                for item in json_chunk:
+                    serializer.create(self, validated_data=item, *args, **kwargs)
 
-        return HttpResponse('Update finished sucessfully.', status=200)
+            return HttpResponse('Update finished sucessfully.', status=200)
+        else:
+            return HttpResponseForbidden('Forbidden request', status=403)
