@@ -20,10 +20,10 @@ class Launch(models.Model):
 class Article(models.Model):
     title = models.CharField(max_length=150)
     url = models.URLField()
-    imageUrl = models.URLField()
+    imageUrl = models.URLField(max_length=600)
     newsSite = models.CharField(max_length=100)
     featured = models.BooleanField(default=False)
-    summary = models.CharField(max_length=1500, blank=True)
+    summary = models.TextField(blank=True)
     publishedAt = models.DateTimeField()
     updatedAt = models.DateTimeField()
     launches = models.ManyToManyField(Launch, blank=True)
