@@ -19,7 +19,7 @@ class Launch(models.Model):
 
 class Article(models.Model):
     title = models.CharField(max_length=150)
-    url = models.URLField()
+    url = models.URLField(max_length=600)
     imageUrl = models.URLField(max_length=600)
     newsSite = models.CharField(max_length=100)
     featured = models.BooleanField(default=False)
