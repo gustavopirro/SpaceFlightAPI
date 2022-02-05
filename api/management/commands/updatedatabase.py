@@ -1,9 +1,11 @@
 from django.core.management.base import BaseCommand
+from api.models import Event
+from api.models import Launch
+from api.models import Article
 import requests
 import asyncio
 import aiohttp
 import math
-from api.serializers import ArticleSerializer
 
 
 class SpaceFlightAPIConsumer():
@@ -59,8 +61,21 @@ class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         api_consumer = SpaceFlightAPIConsumer()
         api_response = asyncio.run(api_consumer.get_all_articles())
-        serializer = ArticleSerializer
 
         for json_chunk in api_response:
             for item in json_chunk:
-                serializer.create(self, validated_data=item)
+                events = item.pop('events')
+                launches = item.pop('launches')
+
+                new_article = Article(**item)
+                new_article.save()
+
+                for event in events:
+                    event_obj = Event(**event)
+                    event_obj.save()
+                    new_article.events.add(event_obj)
+
+                for launch in launches:
+                    launch_obj = Launch(**launch)
+                    launch_obj.save()
+                    new_article.launches.add(launch_obj)
