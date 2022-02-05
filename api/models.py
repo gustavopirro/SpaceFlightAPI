@@ -18,6 +18,7 @@ class Launch(models.Model):
 
 
 class Article(models.Model):
+    id = models.CharField(max_length=150, primary_key=True)
     title = models.CharField(max_length=150)
     url = models.URLField(max_length=600)
     imageUrl = models.URLField(max_length=600)
