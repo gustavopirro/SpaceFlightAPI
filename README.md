@@ -8,6 +8,7 @@
 ✅Unit tests<br>
 ✅Read Only mode for non-authenticated Users<br>
 ✅OOP Code Based<br>
+✅Django-admin Interface<br>
 
 ## Endpoints
 ```
@@ -113,4 +114,9 @@ python manage.py runserver
 ### If you want to use a port other than 8000, run the command like this:
 ```
 python manage.py runserver 127.0.0.1:desired_port
+```
+
+### Populate your database with Space Flight News API Articles
+```
+python manage.py updatedatabase # This will loop through Space Flight News API Articles and save it in your local Database, you can acess the saved data in localhost:8000/articles endpoint
 ```
