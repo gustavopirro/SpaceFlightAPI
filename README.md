@@ -1,78 +1,116 @@
 # Back-end Challenge 🏅 2021 - Space Flight News
 
-### API REST Criada como projeto de desafio para o teste da Coodesh.
-A API possui sistema de paginação e utiliza autenticação via token, permitindo apenas leitura para usuários não autenticados e consome os dados da API Original Space Flight News utilizando chamadas assincronas para verificar com melhor performance se há novos artigos na API original e fazer o update ou criação de novos artigos caso seja necessário.
+### API REST Created as a challenge by Coodesh
+#### Features
+✅Token Auth<br>
+✅Pagination<br>
+✅Session Auth<br>
+✅Unit tests<br>
+✅Read Only mode for non-authenticated Users<br>
+✅OOP Code Based<br>
 
 ## Endpoints
-### Space Flight API 
 ```
-http://127.0.0.1:8000/articles - Retorna lista com todos os artigos da API - Aceita metodos GET/POST
-http://127.0.0.1:8000/articles/<id>/ - Retorna artigo com o id informado - Aceita metodos GET/PUT/DELETE
+http://127.0.0.1:8000/articles - Return list with all API articles - Accepts GET/POST Method
+http://127.0.0.1:8000/articles/<id>/ - Return article with given id - Accepts GET/PUT/DELETE Method
+```
+## Port
+```
+Default port is 8000, but can be changed on server run (Description below).
 ```
 
-```
-Porta padrão é 8000, mas pode ser alterada na inicialização do servidor (Descrito abaixo).
-```
-
-#### Parametros
-| Nome   |      Tipo      |  Descrição | Obrigatório
+## Params
+| Name   |      Type      |  Description | Required
 |:----------:|:-------------:|:----------:|:------:|
-| id |  Int | Id do artigo desejado | Não
+| Id |  Int | Id of desired article | No
 
 
-## Guia de uso
+## How to use
 
-### Clonar o repositório:
+### Clone the repo
 ```
 git clone https://github.com/gustavopirro/SpaceFlightAPI.git
 ```
-### Entrar na pasta do projeto
+### Enter the project folder
 ```
-cd caminho/do/projeto
+cd path/of/project
 ```
 
-### Baixar e instalar dependências:
+### Create virtual enviroment
+```
+python -m venv venv
+```
+
+### Activate virtual enviroment
+```
+venv/scripts/activate
+```
+
+### Download and install dependencys
 ```
 pip install -r requirements.txt
 ```
 
-### Crie o arquivo 'local_settings.py' dentro do diretório 'mysite'.
+### Create 'local_settings.py' file inside SpaceFlight folder, in the same directory as settings.py.
+```
+|---Root
+|---manage.py
+|---SpaceFlight Folder
+|------settings.py
+|------local_settings.py
+```
 
-### Gere e copie uma SECRET_KEY neste site:
+### Generate a new secret key, you can use the site below:
 [https://djecrety.ir/](https://djecrety.ir/)
 
-
-### No local_settings.py crie a variável 'SECRET_KEY' e atribua a ela a key gerada anteriormente:
+### In local_settings.py, create a variable named SECRET_KEY and asign your generated secrey key
 ```
-SECRET_KEY = 'key_gerada' 
+SECRET_KEY = 'generated_key_here' 
 ```
 
-## Configuração do Banco de Dados PostgreSQL:
-### Com o banco PostgreSQL instalado na maquina local, adicione o código abaixo, substituindo os valores de name, host, port, user e password no local_settings.
-### Lembre-se de criar o banco de dados no SGBD do PostgreSQL.
+## PostgreSQL Configuration
+### With postgreSQL installed in your local machine, add the code bellow in your local_settings.py
 ```
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'nome_banco',
-        'HOST': 'host_postgresql',
-        'PORT': 'porta',
-        'USER': 'usuario_postgresql',
-        'PASSWORD': 'senha',
+        'NAME': 'db_name',
+        'HOST': 'db_host',
+        'PORT': 'db_port',
+        'USER': 'db_user',
+        'PASSWORD': 'db_password',
     }
 }
 ```
 
-### Com o terminal aberto na pasta raiz do projeto deve se executar o comando para fazer as migrações:
+### Change the fields db_name, db_host, db_port, db_user and db_password accordingly
+example:
 ```
-python manage.py migrate
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'your_db_name',
+        'HOST': 'localhost'
+        'PORT': '5432',
+        'USER': 'your_db_user',
+        'PASSWORD': 'your_db_password',
+    }
+}
 ```
 
-### Rodando o servidor de forma local, com o terminal na pasta raiz do projeto executar o comando:
+### Don't forget to created a new db in your postgreSQL with the same name of your DB_NAME local_settings value
+
+### With your terminal in the project root folder, run the following command:
+```
+python manage.py migrate # This will create the required tables inside your postgre database.
+```
+
+## Running the server
+### Again in the project root folder, run the server with the command:
 ```
 python manage.py runserver
 ```
-### Caso a porta 8000 esteja ocupada é necessário informar outra porta a ser utilizada:
+### If you want to use a port other than 8000, run the command like this:
 ```
-python manage.py runserver 127.0.0.1:porta_desejada
+python manage.py runserver 127.0.0.1:desired_port
 ```
