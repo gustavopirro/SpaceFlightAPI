@@ -24,21 +24,3 @@ class ArticleSerializer(serializers.ModelSerializer):
         model = Article
         fields = '__all__'
         depth = 1
-
-    def create(self, validated_data, *args, **kwargs):
-        events = validated_data.pop('events')
-        launches = validated_data.pop('launches')
-
-        new_article = Article.objects.get_or_create(
-            id=validated_data['id'], defaults=validated_data
-        )[0]
-
-        for event in events:
-            event_obj = Event.objects.get_or_create(id=event['id'], defaults=event)[0]
-            new_article.events.add(event_obj)
-
-        for launch in launches:
-            launch_obj = Launch.objects.get_or_create(id=launch['id'], defaults=launch)[0]
-            new_article.launches.add(launch_obj)
-
-        return new_article
