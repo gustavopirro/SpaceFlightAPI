@@ -28,7 +28,7 @@ Default port is 8000, but can be changed on server run (Description below).
 
 ## How to use
 
-### Clone the repo
+### Clone the repository
 ```
 git clone https://github.com/gustavopirro/SpaceFlightAPI.git
 ```
@@ -47,7 +47,7 @@ python -m venv venv
 venv/scripts/activate
 ```
 
-### Download and install dependencys
+### Download and install dependencies
 ```
 pip install -r requirements.txt
 ```
