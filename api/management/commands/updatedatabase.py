@@ -6,6 +6,7 @@ import requests
 import asyncio
 import aiohttp
 import math
+import platform
 
 
 class SpaceFlightAPIConsumer():
@@ -60,6 +61,8 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
         api_consumer = SpaceFlightAPIConsumer()
+        if platform.system() == 'Windows':
+            asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
         api_response = asyncio.run(api_consumer.get_all_articles())
 
         for json_chunk in api_response:
@@ -67,15 +70,12 @@ class Command(BaseCommand):
                 events = item.pop('events')
                 launches = item.pop('launches')
 
-                new_article = Article(**item)
-                new_article.save()
+                new_article = Article.objects.update_or_create(**item)[0]
 
                 for event in events:
-                    event_obj = Event(**event)
-                    event_obj.save()
+                    event_obj = Event.objects.update_or_create(**event)[0]
                     new_article.events.add(event_obj)
 
                 for launch in launches:
-                    launch_obj = Launch(**launch)
-                    launch_obj.save()
+                    launch_obj = Launch.objects.update_or_create(**launch)[0]
                     new_article.launches.add(launch_obj)
