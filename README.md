@@ -28,6 +28,31 @@ Default port is 8000, but can be changed on server run (Description below).
 
 ## How to use
 
+## - Run project with Docker
+
+### Clone the repository
+```
+git clone https://github.com/gustavopirro/SpaceFlightAPI.git
+```
+
+### Enter the project folder
+```
+cd path/of/project
+```
+
+### Create and run docker containers
+```
+docker compose up
+```
+
+### Inside the docker container run the command to populate your database with Space Flight News API Articles
+```
+python manage.py updatedatabase # This will loop through Space Flight News API Articles and save it in your local Database, you can acess the saved data in localhost:8000/articles endpoint
+```
+
+
+## - Run project without Docker
+
 ### Clone the repository
 ```
 git clone https://github.com/gustavopirro/SpaceFlightAPI.git
