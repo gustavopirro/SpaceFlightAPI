@@ -8,7 +8,9 @@
 ✅Unit tests<br>
 ✅Read Only mode for non-authenticated Users<br>
 ✅OOP Code Based<br>
+✅Docker build<br>
 ✅Django-admin Interface<br>
+✅Custom django command to populate database<br>
 
 ## Endpoints
 ```
