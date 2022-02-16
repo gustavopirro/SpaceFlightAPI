@@ -11,9 +11,11 @@
 ✅Docker build<br>
 ✅Django-admin Interface<br>
 ✅Custom django command to populate database<br>
+✅Swagger API Documentation<br>
 
 ## Endpoints
 ```
+http://127.0.0.1:8000/ - Swagger API Documentation
 http://127.0.0.1:8000/articles - Return list with all API articles - Accepts GET/POST Method
 http://127.0.0.1:8000/articles/<id>/ - Return article with given id - Accepts GET/PUT/DELETE Method
 ```
