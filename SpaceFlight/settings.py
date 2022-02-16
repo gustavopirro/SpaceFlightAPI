@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "api",
     "rest_framework",
-    'rest_framework.authtoken',
+    "rest_framework.authtoken",
+    "drf_yasg",
 ]
 
 MIDDLEWARE = [
@@ -151,13 +152,19 @@ REST_FRAMEWORK = {
     ],
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticatedOrReadOnly',
-    ]
+    ],
 }
 
 
 # HEROKU CONFIG
 
 django_heroku.settings(locals())
+
+# SWAGGER CONFIG
+
+SWAGGER_SETTINGS = {
+   'USE_SESSION_AUTH': False
+}
 
 
 # Local Settings
