@@ -1,6 +1,6 @@
 # Back-end Challenge 🏅 2021 - Space Flight News
 
-### API REST Created as a challenge by Coodesh
+### API REST Created as a tech challenge
 #### Features
 ✅Token Auth<br>
 ✅Pagination<br>
